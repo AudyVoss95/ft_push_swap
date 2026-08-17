@@ -6,7 +6,7 @@
 /*   By: audgiova <audgiova@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/07/30 14:05:06 by audgiova          #+#    #+#             */
-/*   Updated: 2026/08/17 16:23:03 by audgiova         ###   ########.fr       */
+/*   Updated: 2026/08/17 16:42:27 by audgiova         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,7 +21,6 @@ int	main(int argc, char **argv)
 	i = 1;
 	if (argc < 2)
 	{
-		ft_is_error();
 		return (0);
 	}
 	while (argv[i])
