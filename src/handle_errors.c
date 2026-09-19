@@ -1,20 +1,21 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_push_swap.c                                     :+:      :+:    :+:   */
+/*   handle_errors.c                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: audgiova <audgiova@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/08/17 15:44:00 by audgiova          #+#    #+#             */
-/*   Updated: 2026/08/17 16:21:55 by audgiova         ###   ########.fr       */
+/*   Updated: 2026/09/19 17:52:45 by audgiova         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "push_swap.h"
 
-void	ft_is_error(void)
+int	ft_is_error (t_list **list)
 {
-	ft_printf("Error\n");
+	ft_lstclear(list, free);
+	return (0);
 }
 
 int	is_valid_number(char *str)
@@ -30,7 +31,7 @@ int	is_valid_number(char *str)
 	{
 		i++;
 	}
-	if (str[i])
+	if (!str[i])
 	{
 		return (0);
 	}
@@ -40,15 +41,48 @@ int	is_valid_number(char *str)
 		{
 			return (0);
 		}
+		i++;
 	}
 	return (1);
 }
 
 int	is_valid_int(long long nbr)
 {
-	if (nbr > (int)-1 || nbr < -((int)-1))
+	if (nbr > 2147483647 || nbr < -2147483648)
 	{
 		return (0);
 	}
 	return (1);
+}
+
+int ft_verify_args(char *arg)
+{
+	long long	nbr;
+
+	if (!is_valid_number(arg))
+		{
+			ft_putstr_fd("Error\n", 2);
+			return (0);
+		}
+		nbr = ft_atoi(arg);
+		if (!is_valid_int(nbr))
+		{
+			ft_putstr_fd("Error\n", 2);
+			return (0);
+		}
+	return (1);
+}
+
+static void	*free_matrix(char **matrix)
+{
+	int	i;
+
+	i = 0;
+	while (matrix[i])
+	{
+		free(matrix[i]);
+		i++;
+	}
+	free(matrix);
+	return (NULL);
 }

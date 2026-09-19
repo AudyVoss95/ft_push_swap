@@ -3,7 +3,8 @@ CFLAGS = -Wall -Wextra -Werror
 NAME = push_swap.a
 AR = ar rcs
 SRCS = main.c \
-	ft_push_swap.c
+	parser_interger.c \
+	handle_errors.c
 
 OBJS = $(SRCS:.c=.o)
 LIBFTDIR = libft
