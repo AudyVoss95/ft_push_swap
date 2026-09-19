@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   push.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: andmarqu <andmarqu@student.42sp.org.br>    +#+  +:+       +#+        */
+/*   By: audgiova <audgiova@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/08/10 14:20:50 by andmarqu          #+#    #+#             */
-/*   Updated: 2026/08/10 14:20:50 by andmarqu         ###   ########.fr       */
+/*   Updated: 2026/09/19 19:40:04 by audgiova         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,24 +23,16 @@ static void	push_stack(t_stack *src, t_stack *dst)
 	node = src->top;
 	src->top = node->next;
 	if (src->top == NULL)
-	{
 		src->bottom = NULL;
-	}
 	else
-	{
 		src->top->prev = NULL;
-	}
 	src->size--;
 	node->next = dst->top;
 	node->prev = NULL;
 	if (dst->top)
-	{
 		dst->top->prev = node;
-	}
 	else
-	{
 		dst->bottom = node;
-	}
 	dst->top = node;
 	dst->size++;
 }

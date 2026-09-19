@@ -6,7 +6,7 @@
 /*   By: audgiova <audgiova@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/08/17 15:44:00 by audgiova          #+#    #+#             */
-/*   Updated: 2026/09/19 18:28:14 by audgiova         ###   ########.fr       */
+/*   Updated: 2026/09/19 19:18:28 by audgiova         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -61,13 +61,11 @@ int ft_verify_args(char *arg)
 
 	if (!is_valid_number(arg))
 		{
-			ft_putstr_fd("Error\n", 2);
 			return (0);
 		}
 		nbr = ft_atoi(arg);
 		if (!is_valid_int(nbr))
 		{
-			ft_putstr_fd("Error\n", 2);
 			return (0);
 		}
 	return (1);
