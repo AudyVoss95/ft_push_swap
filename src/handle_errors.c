@@ -6,7 +6,7 @@
 /*   By: audgiova <audgiova@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/08/17 15:44:00 by audgiova          #+#    #+#             */
-/*   Updated: 2026/09/19 17:52:45 by audgiova         ###   ########.fr       */
+/*   Updated: 2026/09/19 18:28:14 by audgiova         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -73,7 +73,7 @@ int ft_verify_args(char *arg)
 	return (1);
 }
 
-static void	*free_matrix(char **matrix)
+void	*free_matrix(char **matrix)
 {
 	int	i;
 
