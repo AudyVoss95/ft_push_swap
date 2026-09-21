@@ -6,16 +6,27 @@
 /*   By: audgiova <audgiova@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/08/17 15:44:00 by audgiova          #+#    #+#             */
-/*   Updated: 2026/09/19 19:18:28 by audgiova         ###   ########.fr       */
+/*   Updated: 2026/09/21 18:26:36 by audgiova         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "push_swap.h"
 
-int	ft_is_error (t_list **list)
+void	ft_free_stack(t_stack *stack)
 {
-	ft_lstclear(list, free);
-	return (0);
+	t_list			*temp_node;	
+
+	if (!stack)
+		return ;
+	while (stack -> top)
+	{
+		temp_node = stack -> top -> next;
+		free(stack -> top);
+		stack -> top = temp_node;
+	}
+	stack -> bottom = NULL;
+	stack -> size = 0;
+	free(stack);
 }
 
 int	is_valid_number(char *str)
@@ -55,32 +66,24 @@ int	is_valid_int(long long nbr)
 	return (1);
 }
 
-int ft_verify_args(char *arg)
+int	ft_verify_args(char *arg)
 {
 	long long	nbr;
 
 	if (!is_valid_number(arg))
-		{
-			return (0);
-		}
+	{
+		return (0);
+	}
 		nbr = ft_atoi(arg);
-		if (!is_valid_int(nbr))
-		{
-			return (0);
-		}
+	if (!is_valid_int(nbr))
+	{
+		return (0);
+	}
 	return (1);
 }
 
-void	*free_matrix(char **matrix)
+int	ft_error(void)
 {
-	int	i;
-
-	i = 0;
-	while (matrix[i])
-	{
-		free(matrix[i]);
-		i++;
-	}
-	free(matrix);
-	return (NULL);
+	ft_putstr_fd("Error\n", 2);
+	return (0);
 }

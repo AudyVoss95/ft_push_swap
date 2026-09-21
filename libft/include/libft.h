@@ -6,7 +6,7 @@
 /*   By: audgiova <audgiova@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/06/05 16:25:00 by audgiova          #+#    #+#             */
-/*   Updated: 2026/09/19 19:29:40 by audgiova         ###   ########.fr       */
+/*   Updated: 2026/09/21 15:12:11 by audgiova         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -50,7 +50,7 @@ void	ft_putchar_fd(char c, int fd);
 void	ft_putstr_fd(char *s, int fd);
 void	ft_putendl_fd(char *s, int fd);
 void	ft_putnbr_fd(int n, int fd);
-typedef struct	s_list
+typedef struct s_list
 {
 	int				value;
 	int				index;

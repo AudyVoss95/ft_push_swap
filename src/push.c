@@ -6,7 +6,7 @@
 /*   By: audgiova <audgiova@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/08/10 14:20:50 by andmarqu          #+#    #+#             */
-/*   Updated: 2026/09/19 19:40:04 by audgiova         ###   ########.fr       */
+/*   Updated: 2026/09/21 18:26:19 by audgiova         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -41,10 +41,14 @@ void	pa(t_stack *a, t_stack *b)
 {
 	push_stack(b, a);
 	ft_printf("pa\n");
+	if (a && a->bench)
+		a->bench->pa++;
 }
 
 void	pb(t_stack *a, t_stack *b)
 {
 	push_stack(a, b);
 	ft_printf("pb\n");
+	if (a && a->bench)
+		a->bench->pb++;
 }

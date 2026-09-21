@@ -6,7 +6,7 @@
 /*   By: audgiova <audgiova@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/07/30 14:05:06 by audgiova          #+#    #+#             */
-/*   Updated: 2026/09/19 17:26:47 by audgiova         ###   ########.fr       */
+/*   Updated: 2026/09/21 18:28:33 by audgiova         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,18 +15,17 @@
 
 int	main(int argc, char **argv)
 {
-	t_list		*stack_a;
-	
+	t_stack		*stack_a;
+	t_stack		*stack_b;
+
 	stack_a = NULL;
+	stack_b = NULL;
+	stack_a -> bench = &stack_b -> bench;
 	if (argc < 2)
 		return (0);
-	if(!parse_args(argc, argv, &stack_a))
+	if (!parse_args(argc, argv, &stack_a, &stack_b))
 	{
-		ft_lstclear(&stack_a, free);
-		ft_putstr_fd("Error\n", 2);
 		return (1);
 	}
-
-
 	return (0);
 }

@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   rotate.c                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: andmarqu <andmarqu@student.42sp.org.br>    +#+  +:+       +#+        */
+/*   By: audgiova <audgiova@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/08/10 18:37:54 by andmarqu          #+#    #+#             */
-/*   Updated: 2026/08/10 18:37:54 by andmarqu         ###   ########.fr       */
+/*   Updated: 2026/09/21 14:44:37 by audgiova         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,21 +33,27 @@ static void	rotate_stack(t_stack *stack)
 	stack->bottom = first;
 }
 
-void ra(t_stack *stack)
+void	ra(t_stack *stack)
 {
 	rotate_stack(stack);
 	ft_printf("ra\n");
+	if (stack && stack->bench)
+		stack->bench->ra++;
 }
 
-void rb(t_stack *stack)
+void	rb(t_stack *stack)
 {
 	rotate_stack(stack);
 	ft_printf("rb\n");
+	if (stack && stack->bench)
+		stack->bench->rb++;
 }
 
-void rr(t_stack *a, t_stack *b)
+void	rr(t_stack *a, t_stack *b)
 {
 	rotate_stack(a);
 	rotate_stack(b);
 	ft_printf("rr\n");
+	if (a && a->bench)
+		a->bench->rrr++;
 }

@@ -3,16 +3,16 @@
 /*                                                        :::      ::::::::   */
 /*   ft_lstnew.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: audgiova <marvin@42.fr>                    +#+  +:+       +#+        */
+/*   By: audgiova <audgiova@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/06/16 15:59:23 by audgiova          #+#    #+#             */
-/*   Updated: 2026/06/17 16:15:19 by audgiova         ###   ########.fr       */
+/*   Updated: 2026/09/21 15:11:35 by audgiova         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libft.h"
 
-t_list	*ft_lstnew( void *content)
+t_list	*ft_lstnew(void *content)
 {
 	struct s_list	*new_node;
 
