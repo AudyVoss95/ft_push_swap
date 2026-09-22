@@ -1,25 +1,37 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_strlen.c                                        :+:      :+:    :+:   */
+/*   indexing.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: andmarqu <andmarqu@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2026/06/05 16:48:48 by audgiova          #+#    #+#             */
-/*   Updated: 2026/09/20 21:00:44 by andmarqu         ###   ########.fr       */
+/*   Created: 2026/09/20 19:00:52 by andmarqu          #+#    #+#             */
+/*   Updated: 2026/09/20 19:49:18 by andmarqu         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "libft.h"
+#include "push_swap.h"
 
-size_t	ft_strlen(const char *str)
+void	index_stack(t_stack *stack)
 {
-	size_t	i;
+	t_node	*current;
+	t_node	*check;
+	int		count;
 
-	i = 0;
-	while (str[i] != '\0')
+	if (!stack || !stack->top)
+		return ;
+	current = stack->top;
+	while (current)
 	{
-		i++;
+		count = 0;
+		check = stack->top;
+		while (check)
+		{
+			if (check->value < current->value)
+				count++;
+			check = check->next;
+		}
+		current->index = count;
+		current = current->next;
 	}
-	return (i);
 }
