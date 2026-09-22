@@ -6,7 +6,7 @@
 /*   By: audgiova <audgiova@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/07/30 14:05:06 by audgiova          #+#    #+#             */
-/*   Updated: 2026/09/21 18:28:33 by audgiova         ###   ########.fr       */
+/*   Updated: 2026/09/21 19:26:09 by audgiova         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,9 +23,11 @@ int	main(int argc, char **argv)
 	stack_a -> bench = &stack_b -> bench;
 	if (argc < 2)
 		return (0);
-	if (!parse_args(argc, argv, &stack_a, &stack_b))
+	if (!parse_args(argc, argv, &stack_a, &stack_b) || stack_a -> size == 0)
 	{
-		return (1);
+		ft_free_stack(stack_a);
+		ft_free_stack(stack_b);
+		return (ft_error());
 	}
 	return (0);
 }

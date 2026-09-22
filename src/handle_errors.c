@@ -6,7 +6,7 @@
 /*   By: audgiova <audgiova@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/08/17 15:44:00 by audgiova          #+#    #+#             */
-/*   Updated: 2026/09/21 18:26:36 by audgiova         ###   ########.fr       */
+/*   Updated: 2026/09/21 19:26:23 by audgiova         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -85,5 +85,5 @@ int	ft_verify_args(char *arg)
 int	ft_error(void)
 {
 	ft_putstr_fd("Error\n", 2);
-	return (0);
+	return (1);
 }
