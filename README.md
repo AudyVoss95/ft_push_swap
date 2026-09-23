@@ -1,66 +1,100 @@
-*This project has been created as part of the 42 curriculum by audgiova, andmarqu.*
+*This project has been created as part of the 42 curriculum by andmarqu, audgiova.*
 
-# Push_swap
+# 🔄 Push_swap - Because Swap_push doesn't feel as natural
 
-## Description
-Push_swap is an algorithmic project designed to sort integer sequences using two stacks (`a` and `b`) and a restricted set of stack instructions. The program must generate the shortest possible sequence of operations while adhering to strict time and space complexity constraints .
+[![42 São Paulo](https://img.shields.io/badge/42-SÃO%20PAULO-000000?style=for-the-badge)](https://www.42sp.org.br/)
+![Language](https://img.shields.io/badge/LANGUAGE-C-A8B9CC?style=for-the-badge&logo=c&logoColor=white)
 
-The program measures the initial state of disorder in stack `a` to dynamically select the most efficient sorting strategy, or alternatively executes a strategy dictated by command-line flags .
+## 📝 Description
+The **Push_swap** project is an algorithmic exercise focused on data sorting and computational complexity (Big-O notation). The goal is to sort a random list of integers on a stack using the lowest possible number of actions.
+
+We are provided with two stacks:
+* **Stack A**: Initially contains a random amount of negative and/or positive numbers without any duplicates.
+* **Stack B**: Initially empty.
+
+The objective is to sort the numbers in Stack A in ascending order. To do this, we are only allowed to use a strictly limited set of operations. 
+
+### Available Operations
+* **Push:**
+  * `pa` (push a): Take the first element at the top of B and put it at the top of A.
+  * `pb` (push b): Take the first element at the top of A and put it at the top of B.
+* **Swap:**
+  * `sa` (swap a): Swap the first two elements at the top of stack A.
+  * `sb` (swap b): Swap the first two elements at the top of stack B.
+  * `ss`: `sa` and `sb` at the same time.
+* **Rotate:**
+  * `ra` (rotate a): Shift up all elements of stack A by one (the first element becomes the last).
+  * `rb` (rotate b): Shift up all elements of stack B by one.
+  * `rr`: `ra` and `rb` at the same time.
+* **Reverse Rotate:**
+  * `rra` (reverse rotate a): Shift down all elements of stack A by one (the last element becomes the first).
+  * `rrb` (reverse rotate b): Shift down all elements of stack B by one.
+  * `rrr`: `rra` and `rrb` at the same time.
 
 ---
 
-## Instructions
+## ⚙️ Algorithms & Data Structure Justification
+
+To handle different input sizes efficiently and strictly respect algorithmic complexity boundaries, this project implements a dynamic, multi-strategy approach. Before sorting, the program computes a **Disorder Metric** (a ratio between 0.0 and 1.0) by calculating the number of inverted pairs in the initial stack. Based on this metric, the program selects one of four strategies:
+
+1. **Simple Algorithm $O(n^2)$**: 
+   * **Target:** Low disorder (< 0.2) or very small inputs.
+   * **Justification:** Baseline extraction sort . Identifies target extrema and pushes elements sequentially, suited for low permutation costs .
+
+2. **Medium Algorithm $O(n\sqrt{n})$**:
+   * **Target:** Medium disorder (0.2 ≤ disorder < 0.5).
+   * **Justification:** A chunk-based partitioning method is used. The stack is divided into $\sqrt{n}$ chunks, pushing elements to Stack B in ranges before pushing them back in order. This balances execution time and operation count without the deep recursion depth of pure divide-and-conquer strategies.
+
+3. **Complex Algorithm $O(n \log n)$**: 
+   * **Target:** High disorder (≥ 0.5) and large inputs.
+   * **Justification:** Implements the **Turk Algorithm** (a greedy cost-optimized insertion strategy). For every element, the algorithm calculates the exact cheapest cost of combined rotations (`rr`, `rrr`, simple rotates) to place it into its sorted target position across stacks. By continuously choosing the lowest-cost move, it guarantees optimal operation efficiency and comfortably satisfies the project limits (e.g., well under 5500 operations for 500 numbers).
+
+4. **Adaptive Algorithm**: 
+   * **Justification:** Acts as the default routing controller. It calculates the disorder metric at runtime and automatically routes the input to the most optimal strategy above, ensuring the absolute lowest operation count possible for any given stack configuration.
+
+---
+
+## 🛠️ Instructions
 
 ### Compilation
-Compile the project with the mandatory flags (`-Wall -Wextra -Werror`) using:
-\`\`\`bash
-make
-\`\`\`
-This builds the binary `push_swap` .
+The project is compiled using the provided `Makefile`. It builds the binary with strict flags (`-Wall -Wextra -Werror`):
+
+* `make` or `make all`: Compiles the `push_swap` binary.
+* `make clean`: Removes intermediate object files in `obj/`.
+* `make fclean`: Removes object files and the `push_swap` executable.
+* `make re`: Performs a complete rebuild.
 
 ### Execution
-Execute the binary followed by the list of integers to sort :
-\`\`\`bash
-./push_swap 3 2 1 6 5
-\`\`\`
+Run the program by passing a list of integers. By default, it runs the **Adaptive** strategy:
 
-#### Command-Line Flags
-- `--simple`: Forces the execution of the $O(n^2)$ algorithm .
-- `--medium`: Forces the execution of the $O(n\sqrt{n})$ algorithm .
-- `--complex`: Forces the execution of the $O(n \log n)$ algorithm .
-- `--adaptive`: Evaluates the disorder metric at runtime and routes to the appropriate regime (default behavior) .
-- `--bench`: Outputs detailed execution metrics to `stderr` .
+```bash
+./push_swap 2 1 3 6 5 8
 
-Running with benchmark analysis:
-\`\`\`bash
-./push_swap --bench 4 67 3 87 23
-\`\`\`
+```
 
----
+**Optional Strategy Flags:**
+You can force a specific algorithm by passing one of the following flags anywhere in the argument list:
 
-## Algorithms & Complexity Justifications
+* `--simple`: Forces the $O(n^2)$ algorithm.
+* `--medium`: Forces the $O(n\sqrt{n})$ chunk-based algorithm.
+* `--complex`: Forces the $O(n \log n)$ Turk algorithm.
+* `--adaptive`: Default automatic routing based on disorder metric.
 
-### 1. Disorder Metric
-Disorder is measured before executing any stack operation by determining the ratio of inverted pairs relative to the total possible pairs :
-$$\text{Disorder} = \frac{\text{mistakes}}{\text{total\_pairs}}$$
-- A metric of `0.0` indicates an already sorted sequence .
-- A metric of `1.0` indicates a reverse-sorted sequence .
+**Benchmark Mode:**
+Use the `--bench` flag to print execution metrics (Disorder %, selected strategy, and operation count breakdown) to `stderr`:
 
-### 2. Strategy Breakdown
-- **Simple ($O(n^2)$)** :
-  - *Method*: Baseline extraction sort . Identifies target extrema and pushes elements sequentially, suited for low permutation costs .
-  - *Operation Complexity*: Generates at most $O(n^2)$ stack instructions .
-- **Medium ($O(n\sqrt{n})$)** :
-  - *Method*: Chunk-based partitioning using index ranges proportional to $\sqrt{n}$ . Elements are pushed to stack `b` within designated value windows to constrain rotation overhead .
-  - *Operation Complexity*: $O(n\sqrt{n})$ generated instructions .
-- **Complex ($O(n \log n)$)** :
-  - *Method*: The **Turk algorithm** (`turk_cost.c`, `turk_move.c`). Computes the combined rotational distance (`rr`, `rrr`, single rotations) for every node in `a` to its target position in `b`, executing the lowest-cost move iteratively .
-  - *Operation Complexity*: Efficiently bounds operations to an $O(n \log n)$ scaling profile .
-- **Adaptive Strategy (Learner's Design)** :
-  - **Low Disorder ($< 0.2$)**: Uses Simple sort, avoiding high overhead when very few inversions exist.
-  - **Medium Disorder ($0.2 \le \text{disorder} < 0.5$)**: Uses Chunk-based sorting, balancing partitioning cost against element distribution.
-  - **High Disorder ($\ge 0.5$)**: Uses the Turk algorithm to resolve complex entropy with minimal operations.
+```bash
+./push_swap --bench --adaptive 4 67 3 87 23
 
+```
+
+**Validating with the Official Checker:**
+Pipe the standard output into the 42 checker binary to verify sorting correctness (bench metrics on `stderr` will not disrupt the pipeline):
+
+```bash
+ARG="4 67 3 87 23"; ./push_swap --bench $ARG \vert{} ./checker_linux$ARG
+
+```
 ---
 
 ## Team Contributions
@@ -70,12 +104,9 @@ $$\text{Disorder} = \frac{\text{mistakes}}{\text{total\_pairs}}$$
 
 ---
 
-## Resources & AI Usage
+## 🧠 Resources
 
-- **References**:
-  - 42 Push_swap Subject documentation (v1.1) .
-  - Knuth, Donald. *The Art of Computer Programming, Volume 3: Sorting and Searching* .
-  - Stack-based sorting and greedy cost heuristics (Turk Algorithm).
-- **AI Usage**:
-  - Formulating parsing control flow to decouple `--bench` flags from algorithm selector flags .
-  - Refactoring safe node cleanup routines to prevent memory leaks and dangling pointer dereferencing during error cascades .
+* **Algorithmic Complexity:** "Introduction to Algorithms" by Thomas H. Cormen (Big-O notation fundamentals).
+
+
+* **AI Usage:** In alignment with the 42 curriculum guidelines regarding foundational learning, AI was used solely as a structural documentation assistant. AI tools were not queried for direct code answers or logic solutions. Reasoning and peer-learning were the primary drivers for project completion, ensuring genuine intellectual effort.
