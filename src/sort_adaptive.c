@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   sort_adaptive.c                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: andmarqu <andmarqu@student.42sp.org.br>    +#+  +:+       +#+        */
+/*   By: audgiova <audgiova@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/09/20 21:15:00 by andmarqu          #+#    #+#             */
-/*   Updated: 2026/09/21 20:28:25 by andmarqu         ###   ########.fr       */
+/*   Updated: 2026/09/22 19:55:39 by audgiova         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -50,6 +50,25 @@ double	calculate_disorder(t_stack *stack)
 	return ((double)inversions / (double)max_inversions);
 }
 
+static void	apply_adaptive(t_data *data, double disorder)
+{
+	if (disorder < 0.15 && data->a.size <= 50)
+	{
+		data->bench.strategy = STRAT_ADAPTIVE_S;
+		sort_simple(data);
+	}
+	else if (disorder < 0.50 && data->a.size <= 100)
+	{
+		data->bench.strategy = STRAT_ADAPTIVE_M;
+		sort_medium(data);
+	}
+	else
+	{
+		data->bench.strategy = STRAT_ADAPTIVE_C;
+		sort_complex(data);
+	}
+}
+
 void	sort_adaptive(t_data *data)
 {
 	double	disorder;
@@ -58,23 +77,10 @@ void	sort_adaptive(t_data *data)
 		return ;
 	if (data->a.size <= 5)
 	{
+		data->bench.strategy = STRAT_ADAPTIVE_S;
 		sort_small(data);
 		return ;
 	}
 	disorder = calculate_disorder(&data->a);
-	if (disorder < 0.15 && data->a.size <= 50)
-	{
-		sort_simple(data);
-		data->bench.strategy = STRAT_ADAPTIVE_S;
-	}
-	else if (disorder < 0.50 && data->a.size <= 100)
-	{
-		sort_medium(data);
-		data->bench.strategy = STRAT_ADAPTIVE_M;
-	}
-	else
-	{
-		sort_complex(data);
-		data->bench.strategy = STRAT_ADAPTIVE_C;
-	}
+	apply_adaptive(data, disorder);
 }
