@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   push.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: andmarqu <andmarqu@student.42sp.org.br>    +#+  +:+       +#+        */
+/*   By: audgiova <audgiova@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/08/10 14:20:50 by andmarqu          #+#    #+#             */
-/*   Updated: 2026/09/21 21:21:41 by andmarqu         ###   ########.fr       */
+/*   Updated: 2026/09/23 16:34:15 by audgiova         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -45,6 +45,8 @@ void	pa(t_stack *a, t_stack *b)
 			a->bench->pa++;
 			a->bench->total++;
 		}
+		if (a->bench->count_only)
+			return ;
 		ft_printf("pa\n");
 	}
 }
@@ -58,6 +60,8 @@ void	pb(t_stack *a, t_stack *b)
 			a->bench->pb++;
 			a->bench->total++;
 		}
+		if (a->bench->count_only)
+			return ;
 		ft_printf("pb\n");
 	}
 }
