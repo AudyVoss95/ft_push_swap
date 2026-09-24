@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   push_swap.h                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: andmarqu <andmarqu@student.42sp.org.br>    +#+  +:+       +#+        */
+/*   By: audgiova <audgiova@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/09/20 20:43:04 by andmarqu          #+#    #+#             */
-/*   Updated: 2026/09/21 20:27:32 by andmarqu         ###   ########.fr       */
+/*   Updated: 2026/09/23 16:28:10 by audgiova         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -48,6 +48,7 @@ struct s_node
 struct s_bench
 {
 	int				enabled;
+	int				count_only;
 	t_strategy		strategy;
 	double			disorder;
 	int				total;

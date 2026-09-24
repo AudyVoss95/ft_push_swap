@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   swap.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: andmarqu <andmarqu@student.42sp.org.br>    +#+  +:+       +#+        */
+/*   By: audgiova <audgiova@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/08/10 13:00:41 by andmarqu          #+#    #+#             */
-/*   Updated: 2026/09/20 20:37:31 by andmarqu         ###   ########.fr       */
+/*   Updated: 2026/09/23 16:34:59 by audgiova         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -42,6 +42,8 @@ void	sa(t_stack *a)
 			a->bench->sa++;
 			a->bench->total++;
 		}
+		if (a->bench->count_only)
+			return ;
 		ft_printf("sa\n");
 	}
 }
@@ -55,6 +57,8 @@ void	sb(t_stack *b)
 			b->bench->sb++;
 			b->bench->total++;
 		}
+		if (b->bench->count_only)
+			return ;
 		ft_printf("sb\n");
 	}
 }
@@ -73,6 +77,8 @@ void	ss(t_stack *a, t_stack *b)
 			a->bench->ss++;
 			a->bench->total++;
 		}
+		if (a->bench->count_only)
+			return ;
 		ft_printf("ss\n");
 	}
 }

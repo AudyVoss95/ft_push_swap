@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   main.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: andmarqu <andmarqu@student.42sp.org.br>    +#+  +:+       +#+        */
+/*   By: audgiova <audgiova@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/09/20 21:40:00 by andmarqu          #+#    #+#             */
-/*   Updated: 2026/09/20 21:05:47 by andmarqu         ###   ########.fr       */
+/*   Updated: 2026/09/23 16:32:04 by audgiova         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,6 +23,7 @@ static void	init_data(t_data *data)
 	data->b.size = 0;
 	data->b.bench = &data->bench;
 	data->bench.enabled = 0;
+	data->bench.count_only = 0;
 	data->bench.strategy = STRAT_ADAPTIVE;
 	data->bench.disorder = 0.0;
 	data->bench.total = 0;

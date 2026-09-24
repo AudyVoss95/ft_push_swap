@@ -6,7 +6,7 @@
 /*   By: audgiova <audgiova@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/09/20 21:10:00 by andmarqu          #+#    #+#             */
-/*   Updated: 2026/09/21 22:56:08 by audgiova         ###   ########.fr       */
+/*   Updated: 2026/09/23 16:37:36 by audgiova         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -55,6 +55,8 @@ int	parse_flag(char *arg, t_bench *bench)
 		bench->strategy = STRAT_ADAPTIVE;
 	else if (ft_strcmp(arg, "--bench") == 0)
 		bench->enabled = 1;
+	else if (ft_strcmp(arg, "--count-only") == 0)
+		bench->count_only = 1;
 	else
 		return (0);
 	return (1);
@@ -85,6 +87,10 @@ static void	print_meta(t_bench *b)
 
 void	print_bench(t_bench *b)
 {
+	if (b ->count_only)
+	{
+		ft_putnbr_fd(b->total, 1);
+	}
 	if (!b || !b->enabled)
 		return ;
 	print_meta(b);

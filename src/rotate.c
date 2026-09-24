@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   rotate.c                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: andmarqu <andmarqu@student.42sp.org.br>    +#+  +:+       +#+        */
+/*   By: audgiova <audgiova@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/08/10 18:37:54 by andmarqu          #+#    #+#             */
-/*   Updated: 2026/09/20 20:37:46 by andmarqu         ###   ########.fr       */
+/*   Updated: 2026/09/23 16:34:43 by audgiova         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -41,6 +41,8 @@ void	ra(t_stack *stack)
 			stack->bench->ra++;
 			stack->bench->total++;
 		}
+		if (stack->bench->count_only)
+			return ;
 		ft_printf("ra\n");
 	}
 }
@@ -54,6 +56,8 @@ void	rb(t_stack *stack)
 			stack->bench->rb++;
 			stack->bench->total++;
 		}
+		if (stack->bench->count_only)
+			return ;
 		ft_printf("rb\n");
 	}
 }
@@ -72,6 +76,8 @@ void	rr(t_stack *a, t_stack *b)
 			a->bench->rr++;
 			a->bench->total++;
 		}
+		if (a->bench->count_only)
+			return ;
 		ft_printf("rr\n");
 	}
 }
